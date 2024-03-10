@@ -12,22 +12,47 @@ import {
 import { RiVerifiedBadgeFill, RiDeleteBinLine } from "react-icons/ri";
 import VideoCard from "../VideoCard.tsx";
 import SkeletonLoading from "../SkeletonLoading/SkeletonLoading.tsx";
-import { getVideos } from "../../redux/action.js";
+import { getVideos } from "../../redux/action";
+
+interface Video {
+  postId: string;
+  submission: {
+    mediaUrl: string;
+    description: string;
+  };
+  creator: {
+    pic: string;
+    name: string;
+  };
+  reaction: {
+    count: number;
+  };
+  comment: {
+    commentingAllowed: boolean;
+  };
+}
+
+interface Comment {
+  id: number;
+  text: string;
+  date: string;
+}
 
 const VideoScreen: React.FC = () => {
-  let { id } = useParams();
-  const [video, setVideo] = useState(null);
+  let { id } = useParams<{ id: string }>();
+  const [video, setVideo] = useState<Video | null>(null);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [dislikeCount, setDislikeCount] = useState(0);
   const [commentText, setCommentText] = useState("");
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [showDescription, setShowDescription] = useState(false);
   const [showComments, setShowComments] = useState(false);
-  const { videos } = useSelector((state) => state);
+  const { videos } = useSelector((state: { videos: Video[] }) => state);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     const videoFind = videos?.find((elm) => elm.postId === id);
     if (videoFind) {
@@ -42,29 +67,45 @@ const VideoScreen: React.FC = () => {
       const storedComments =
         JSON.parse(localStorage.getItem(`comments_${videoFind.postId}`)) || [];
       setComments(storedComments);
+      setLiked(localStorage.getItem(`liked_${videoFind.postId}`) === "true");
+      setDisliked(
+        localStorage.getItem(`disliked_${videoFind.postId}`) === "true"
+      );
     }
   }, [id, videos]);
 
   useEffect(() => {
     dispatch(getVideos());
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [id, dispatch]);
 
   const handleLike = () => {
     if (!liked) {
       setLiked(true);
       setLikeCount((prev) => prev + 1);
-      localStorage.setItem(`likecount_${video.postId}`, likeCount + 1);
+      localStorage.setItem(
+        `likecount_${video?.postId}`,
+        (likeCount + 1).toString()
+      );
+      localStorage.setItem(`liked_${video?.postId}`, "true");
 
       if (disliked) {
         setDisliked(false);
         setDislikeCount((prev) => prev - 1);
-        localStorage.setItem(`dislikecount_${video?.postId}`, dislikeCount - 1);
+        localStorage.setItem(
+          `dislikecount_${video?.postId}`,
+          (dislikeCount - 1).toString()
+        );
+        localStorage.setItem(`disliked_${video?.postId}`, "false");
       }
     } else {
       setLiked(false);
       setLikeCount((prev) => prev - 1);
-      localStorage.setItem(`likecount_${video.postId}`, likeCount - 1);
+      localStorage.setItem(
+        `likecount_${video?.postId}`,
+        (likeCount - 1).toString()
+      );
+      localStorage.setItem(`liked_${video?.postId}`, "false");
     }
   };
 
@@ -72,17 +113,29 @@ const VideoScreen: React.FC = () => {
     if (!disliked) {
       setDisliked(true);
       setDislikeCount((prev) => prev + 1);
-      localStorage.setItem(`dislikecount_${video?.postId}`, dislikeCount + 1);
+      localStorage.setItem(
+        `dislikecount_${video?.postId}`,
+        (dislikeCount + 1).toString()
+      );
+      localStorage.setItem(`disliked_${video?.postId}`, "true");
 
       if (liked) {
         setLiked(false);
         setLikeCount((prev) => prev - 1);
-        localStorage.setItem(`likecount_${video.postId}`, likeCount - 1);
+        localStorage.setItem(
+          `likecount_${video?.postId}`,
+          (likeCount - 1).toString()
+        );
+        localStorage.setItem(`liked_${video?.postId}`, "false");
       }
     } else {
       setDisliked(false);
       setDislikeCount((prev) => prev - 1);
-      localStorage.setItem(`dislikecount_${video?.postId}`, dislikeCount - 1);
+      localStorage.setItem(
+        `dislikecount_${video?.postId}`,
+        (dislikeCount - 1).toString()
+      );
+      localStorage.setItem(`disliked_${video?.postId}`, "false");
     }
   };
 
