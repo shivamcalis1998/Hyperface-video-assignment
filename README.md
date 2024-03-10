@@ -18,8 +18,11 @@ This project is a dynamic video player built using ReactJS, TypeScript, Tailwind
 
   
 ## Screenshot
-![Screenshot (603)](https://github.com/shivamcalis1998/propftx-full-stack/assets/114653221/643250fa-858d-4fb7-92fa-40ea0b5fe8d8)
-![Screenshot (604)](https://github.com/shivamcalis1998/propftx-full-stack/assets/114653221/572f6d2e-b691-4402-a0dc-35629ccc67b3)
+![1](https://github.com/shivamcalis1998/Hypergro-video-assignment/assets/114653221/a1fbb5e1-2e56-4540-a1bd-c85d8835b4e3)
+![2](https://github.com/shivamcalis1998/Hypergro-video-assignment/assets/114653221/6b53d848-a8e2-4c4e-8730-ab0b72f2d5be)
+![3](https://github.com/shivamcalis1998/Hypergro-video-assignment/assets/114653221/b1a115a2-dd14-4413-8d56-548505e2d40b)
+![4](https://github.com/shivamcalis1998/Hypergro-video-assignment/assets/114653221/425e5fea-15f1-4ed3-a9b6-96a6e31eac1e)
+
 
 ## Technologies Used
 
