@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
+
+import {
+  FaRegThumbsUp,
+  FaThumbsUp,
+  FaRegThumbsDown,
+  FaThumbsDown,
+} from "react-icons/fa";
+
 import { RiVerifiedBadgeFill, RiDeleteBinLine } from "react-icons/ri";
 import VideoCard from "../VideoCard.tsx";
 import SkeletonLoading from "../SkeletonLoading/SkeletonLoading.tsx";
@@ -44,21 +51,39 @@ const VideoScreen: React.FC = () => {
   }, [id]);
 
   const handleLike = () => {
-    setLiked(true);
-    setLikeCount((prev) => prev + 1);
-    localStorage.setItem(`likecount_${video.postId}`, likeCount + 1);
-    setTimeout(() => {
+    if (!liked) {
+      setLiked(true);
+      setLikeCount((prev) => prev + 1);
+      localStorage.setItem(`likecount_${video.postId}`, likeCount + 1);
+
+      if (disliked) {
+        setDisliked(false);
+        setDislikeCount((prev) => prev - 1);
+        localStorage.setItem(`dislikecount_${video?.postId}`, dislikeCount - 1);
+      }
+    } else {
       setLiked(false);
-    }, 1000);
+      setLikeCount((prev) => prev - 1);
+      localStorage.setItem(`likecount_${video.postId}`, likeCount - 1);
+    }
   };
 
   const handleDislike = () => {
-    setDisliked(true);
-    setDislikeCount((prev) => prev + 1);
-    localStorage.setItem(`dislikecount_${video?.postId}`, dislikeCount + 1);
-    setTimeout(() => {
+    if (!disliked) {
+      setDisliked(true);
+      setDislikeCount((prev) => prev + 1);
+      localStorage.setItem(`dislikecount_${video?.postId}`, dislikeCount + 1);
+
+      if (liked) {
+        setLiked(false);
+        setLikeCount((prev) => prev - 1);
+        localStorage.setItem(`likecount_${video.postId}`, likeCount - 1);
+      }
+    } else {
       setDisliked(false);
-    }, 1000);
+      setDislikeCount((prev) => prev - 1);
+      localStorage.setItem(`dislikecount_${video?.postId}`, dislikeCount - 1);
+    }
   };
 
   const handleAddComment = () => {
@@ -121,21 +146,32 @@ const VideoScreen: React.FC = () => {
           </div>
           <div className="flex gap-3 mt-3 px-8">
             <div className={`flex items-center `}>
-              <FiThumbsUp
-                className={`text-green-500 cursor-pointer text-lg sm:text-2xl ${
-                  liked ? "text-opacity-50" : ""
-                }`}
-                onClick={handleLike}
-              />
+              {liked ? (
+                <FaThumbsUp
+                  className={`text-green-500 cursor-pointer text-lg sm:text-2xl`}
+                  onClick={handleLike}
+                />
+              ) : (
+                <FaRegThumbsUp
+                  className={`text-green-500 cursor-pointer text-lg sm:text-2xl opacity-60`}
+                  onClick={handleLike}
+                />
+              )}
+
               <span className="text-white ml-1">{likeCount}</span>
             </div>
             <div className={`flex items-center `}>
-              <FiThumbsDown
-                className={`text-red-500 cursor-pointer text-lg sm:text-2xl ${
-                  disliked ? "text-opacity-50" : ""
-                }`}
-                onClick={handleDislike}
-              />
+              {disliked ? (
+                <FaThumbsDown
+                  className={`text-red-500 cursor-pointer text-lg sm:text-2xl`}
+                  onClick={handleDislike}
+                />
+              ) : (
+                <FaRegThumbsDown
+                  className={`text-red-500 cursor-pointer text-lg sm:text-2xl opacity-60`}
+                  onClick={handleDislike}
+                />
+              )}
               <span className="text-white ml-1">{dislikeCount}</span>
             </div>
           </div>
