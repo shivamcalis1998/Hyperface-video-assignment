@@ -8,6 +8,7 @@ This project is a dynamic video player built using ReactJS, TypeScript, Tailwind
 
 - **Dynamic video playback:** Users can play, pause, seek, and control volume for videos.
 - **Dynamic loading:** Videos are loaded dynamically, allowing for a smooth user experience.
+- **Skeleton loading:** Utilizes skeleton loading to provide a placeholder UI while content is being fetched, improving perceived performance.
 - **Customizable UI:** Tailwind CSS and Skeleton are used to create a responsive and visually appealing user interface.
 - **State management:** Redux is employed for efficient state management, ensuring a robust and scalable application.
 - **TypeScript integration:** TypeScript is used to enhance code readability, maintainability, and developer productivity.
