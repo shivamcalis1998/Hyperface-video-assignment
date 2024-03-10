@@ -1,16 +1,33 @@
-/* SkeletonLoading.css */
-
-.skeleton-loading {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .skeleton-box {
   width: 80%;
   height: 200px;
   background-color: #d4d6ee;
   margin: 8px auto;
   border-radius: 8px;
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+.skeleton-name {
+  width: 60%;
+  height: 10px;
+  background-color: #d4d6ee;
+  margin-left: 6px; /* Adjust margin as per your requirement */
+  border-radius: 8px;
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+.skeleton-smallbox {
+  width: 60%;
+  height: 10px;
+  background-color: #d4d6ee;
+  margin: 8px auto;
+  border-radius: 8px;
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+.skeleton-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #d4d6ee;
+  margin-left: 35px;
   animation: pulse 1.5s ease-in-out infinite alternate;
 }
 

@@ -26,7 +26,7 @@ const VideoCard: React.FC<Props> = ({
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const navigat = useNavigate();
+  const navigate = useNavigate();
   const handleMouseEnter = () => {
     setIsHovered(true);
     if (videoRef.current) {
@@ -52,7 +52,7 @@ const VideoCard: React.FC<Props> = ({
     >
       <div
         className="relative overflow-hidden rounded-lg hover:rounded-none h-[200px]"
-        onClick={() => navigat(`/video/${videoid}`)}
+        onClick={() => navigate(`/video/${videoid}`)}
       >
         {isHovered ? (
           <video
@@ -72,7 +72,7 @@ const VideoCard: React.FC<Props> = ({
       </div>
       <div
         className="mt-2 flex items-start gap-4"
-        onClick={() => navigat(`/video/${videoid}`)}
+        onClick={() => navigate(`/video/${videoid}`)}
       >
         <img src={creator.pic} alt="" className="w-9 h-9 rounded-full" />
 

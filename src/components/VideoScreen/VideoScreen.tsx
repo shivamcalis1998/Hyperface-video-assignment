@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import VideoCard from "../VideoCard.tsx";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import SkeletonLoading from "../SkeletonLoading/SkeletonLoading.tsx";
+import { getVideos } from "../../redux/action.js";
 
 const VideoScreen: React.FC = () => {
-  const { id } = useParams();
+  let { id } = useParams();
   const [video, setVideo] = useState(null);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
@@ -19,6 +20,7 @@ const VideoScreen: React.FC = () => {
   const [showComments, setShowComments] = useState(false);
   const { videos } = useSelector((state) => state);
 
+  const dispatch = useDispatch();
   useEffect(() => {
     const videoFind = videos?.find((elm) => elm.postId === id);
     if (videoFind) {
@@ -33,9 +35,13 @@ const VideoScreen: React.FC = () => {
       const storedComments =
         JSON.parse(localStorage.getItem(`comments_${videoFind.postId}`)) || [];
       setComments(storedComments);
-      window.scrollTo(0, 0);
     }
   }, [id, videos]);
+
+  useEffect(() => {
+    dispatch(getVideos());
+    window.scrollTo(0, 0);
+  }, [id]);
 
   const handleLike = () => {
     setLiked(true);
@@ -76,9 +82,9 @@ const VideoScreen: React.FC = () => {
   };
 
   return (
-    <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-4 px-6">
-      <div className="flex-1">
-        <div className="h-[70vh]">
+    <div className="md:mt-[6rem] sm:mt-0 flex flex-col sm:flex-row gap-4 px-6">
+      <div className="md:w-[60%] sm:w-[100%]">
+        <div className="h-[80vh]">
           {video && (
             <video
               src={video?.submission?.mediaUrl}
@@ -155,12 +161,12 @@ const VideoScreen: React.FC = () => {
               </h1>
               <textarea
                 placeholder="Add a comment..."
-                className="w-full p-2 mt-2 border rounded-md h-24"
+                className="w-full p-2 mt-2   border-b border-gray-600 h-12 text-white bg-[#181818] outline-none "
                 onChange={(e) => setCommentText(e.target.value)}
                 value={commentText}
               />
               <button
-                className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                className="mt-2 float-right  bg-[#808080] text-white font-semibold px-4 py-2 rounded-md hover:bg-[#646464]"
                 onClick={handleAddComment}
               >
                 Add Comment
@@ -168,7 +174,7 @@ const VideoScreen: React.FC = () => {
             </div>
           )}
           {showComments && (
-            <ul className="mt-4 mb-20">
+            <ul className="mt-20 mb-20">
               <h2 className="text-white text-[30px]">Comments:</h2>
               {comments?.map((comment) => (
                 <li
