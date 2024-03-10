@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   submission: {
@@ -14,12 +15,18 @@ interface Props {
   reaction: {
     count: number;
   };
+  videoid: String;
 }
 
-const VideoCard: React.FC<Props> = ({ submission, creator, reaction }) => {
+const VideoCard: React.FC<Props> = ({
+  submission,
+  creator,
+  reaction,
+  videoid,
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-
+  const navigat = useNavigate();
   const handleMouseEnter = () => {
     setIsHovered(true);
     if (videoRef.current) {
@@ -39,18 +46,21 @@ const VideoCard: React.FC<Props> = ({ submission, creator, reaction }) => {
 
   return (
     <div
-      className=""
+      className=" cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="relative overflow-hidden rounded-lg hover:rounded-none h-[200px]">
+      <div
+        className="relative overflow-hidden rounded-lg hover:rounded-none h-[200px]"
+        onClick={() => navigat(`/video/${videoid}`)}
+      >
         {isHovered ? (
           <video
             ref={videoRef}
             src={submission.mediaUrl}
             className="m-auto h-full rounded-lg transition duration-300 transform hover:scale-105"
             loop
-            // muted
+            muted
           ></video>
         ) : (
           <img
@@ -60,7 +70,10 @@ const VideoCard: React.FC<Props> = ({ submission, creator, reaction }) => {
           />
         )}
       </div>
-      <div className="mt-2 flex items-start gap-4">
+      <div
+        className="mt-2 flex items-start gap-4"
+        onClick={() => navigat(`/video/${videoid}`)}
+      >
         <img src={creator.pic} alt="" className="w-9 h-9 rounded-full" />
 
         <div>

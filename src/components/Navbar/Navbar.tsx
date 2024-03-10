@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
               <input
                 type="text"
                 placeholder="Search"
-                className="w-96 py-2 rounded-full px-4 border border-gray-800 border-r-0 focus:outline-none focus:border-gray-500 bg-gray-800"
+                className="w-48 sm:w-64 md:w-96 py-2 rounded-full px-4 border border-gray-800 border-r-0 focus:outline-none focus:border-gray-500 bg-gray-800"
               />
 
               <button className="absolute right-0 top-0 mt-2 mr-2 focus:outline-none">
