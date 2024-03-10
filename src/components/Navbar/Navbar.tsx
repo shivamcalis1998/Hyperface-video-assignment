@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
               Hypergro
             </a>
           </div>
-          <div className="flex ml-4">
+          {/* <div className="flex ml-4">
             <div className="relative flex items-center">
               <input
                 type="text"
@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
                 <IoSearchOutline className="w-6 h-6 text-gray-500" />
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>

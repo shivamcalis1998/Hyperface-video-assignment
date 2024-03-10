@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
+import { RiVerifiedBadgeFill, RiDeleteBinLine } from "react-icons/ri";
 import VideoCard from "../VideoCard.tsx";
-import { RiVerifiedBadgeFill } from "react-icons/ri";
 import SkeletonLoading from "../SkeletonLoading/SkeletonLoading.tsx";
 import { getVideos } from "../../redux/action.js";
 
@@ -76,6 +76,17 @@ const VideoScreen: React.FC = () => {
     );
   };
 
+  const handleDeleteComment = (commentId: number) => {
+    const updatedComments = comments.filter(
+      (comment) => comment.id !== commentId
+    );
+    setComments(updatedComments);
+    localStorage.setItem(
+      `comments_${video?.postId}`,
+      JSON.stringify(updatedComments)
+    );
+  };
+
   const toggleDescriptionAndComments = () => {
     setShowDescription(!showDescription);
     setShowComments(!showComments);
@@ -109,9 +120,7 @@ const VideoScreen: React.FC = () => {
             <RiVerifiedBadgeFill className="text-gray-600" />
           </div>
           <div className="flex gap-3 mt-3 px-8">
-            <div
-              className={`flex items-center ${liked ? "animate-pulse" : ""}`}
-            >
+            <div className={`flex items-center `}>
               <FiThumbsUp
                 className={`text-green-500 cursor-pointer text-lg sm:text-2xl ${
                   liked ? "text-opacity-50" : ""
@@ -120,9 +129,7 @@ const VideoScreen: React.FC = () => {
               />
               <span className="text-white ml-1">{likeCount}</span>
             </div>
-            <div
-              className={`flex items-center ${disliked ? "animate-pulse" : ""}`}
-            >
+            <div className={`flex items-center `}>
               <FiThumbsDown
                 className={`text-red-500 cursor-pointer text-lg sm:text-2xl ${
                   disliked ? "text-opacity-50" : ""
@@ -182,7 +189,15 @@ const VideoScreen: React.FC = () => {
                   className="flex justify-between text-white"
                 >
                   <p>{comment?.text}</p>
-                  <p className="text-xs">{comment?.date}</p>
+                  <div className="flex items-center">
+                    <p className="text-xs">{comment?.date}</p>
+                    <button
+                      className="text-red-500 ml-2 text-[20px]"
+                      onClick={() => handleDeleteComment(comment.id)}
+                    >
+                      <RiDeleteBinLine />
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>

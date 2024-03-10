@@ -4,7 +4,7 @@ import { GET_VIDEOS } from "./actionType";
 export const getVideos = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      `https://internship-service.onrender.com/videos?page=1&limit=9`,
+      `https://internship-service.onrender.com/videos?page=2&limit=9`,
       {
         headers: {
           "Content-Type": "application/json",
