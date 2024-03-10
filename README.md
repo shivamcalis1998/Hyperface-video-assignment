@@ -11,7 +11,9 @@ This project is a dynamic video player built using ReactJS, TypeScript, Tailwind
 - **Customizable UI:** Tailwind CSS and Skeleton are used to create a responsive and visually appealing user interface.
 - **State management:** Redux is employed for efficient state management, ensuring a robust and scalable application.
 - **TypeScript integration:** TypeScript is used to enhance code readability, maintainability, and developer productivity.
-
+- **Like/dislike functionality:** Users can like or dislike videos, providing feedback on content.
+- **Comment functionality:** Users can leave comments on videos, facilitating engagement and interaction.
+- **Local storage:** Utilizes local storage for storing user preferences and data, enhancing user experience and reducing server load.
 
   
 ## Screenshot
@@ -24,7 +26,6 @@ This project is a dynamic video player built using ReactJS, TypeScript, Tailwind
   - Redux (for state management)
   - Axios (for making HTTP requests)
   - typescript
-  - 
 
 ## Deployment
 
