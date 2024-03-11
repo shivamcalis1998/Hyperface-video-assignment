@@ -56,6 +56,11 @@ const VideoScreen: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getVideos(currentPage));
+    window.scrollTo(0, 0);
+  }, [id, dispatch, currentPage]);
+
+  useEffect(() => {
     const videoFind = videos?.find((elm) => elm.postId === id);
     if (videoFind) {
       setVideo(videoFind);
@@ -75,11 +80,6 @@ const VideoScreen: React.FC = () => {
       );
     }
   }, [id, videos]);
-
-  useEffect(() => {
-    dispatch(getVideos(currentPage));
-    window.scrollTo(0, 0);
-  }, [id, dispatch, currentPage]);
 
   const handleLike = () => {
     if (!liked) {
@@ -295,18 +295,36 @@ const VideoScreen: React.FC = () => {
           )}
         </div>
       </div>
-      <div className="flex-1 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+      <div
+        className="flex-1 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 overflow-y-auto max-h-[calc(120vh-200px)]"
+        style={{
+          overflowY: "auto",
+          maxHeight: "calc(120vh - 200px)",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        <style>
+          {`
+      .overflow-y-auto::-webkit-scrollbar {
+        display: none;
+      }
+    `}
+        </style>
+
         {videos
-          ? videos.map((video) => (
-              <VideoCard
-                key={video?.postId}
-                videoid={video?.postId}
-                submission={video?.submission}
-                creator={video?.creator}
-                reaction={video?.reaction}
-              />
-            ))
-          : Array.from({ length: 4 }).map((_, index) => (
+          ? videos
+              .slice(0, 10)
+              .map((video) => (
+                <VideoCard
+                  key={video?.postId}
+                  videoid={video?.postId}
+                  submission={video?.submission}
+                  creator={video?.creator}
+                  reaction={video?.reaction}
+                />
+              ))
+          : Array.from({ length: 10 }).map((_, index) => (
               <SkeletonLoading key={index} />
             ))}
       </div>

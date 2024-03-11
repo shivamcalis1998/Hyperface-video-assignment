@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar.tsx";
 import HomeScreen from "./components/HomeScreen/HomeScreen.tsx";
 import { Route, Routes } from "react-router-dom";
 import VideoScreen from "./components/VideoScreen/VideoScreen.tsx";
+import Footer from "./components/Footer.tsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<HomeScreen />} />
         <Route path="/video/:id" element={<VideoScreen />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
