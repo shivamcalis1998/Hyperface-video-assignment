@@ -16,6 +16,7 @@ interface Props {
     count: number;
   };
   videoid: String;
+  currentPage: number;
 }
 
 const VideoCard: React.FC<Props> = ({

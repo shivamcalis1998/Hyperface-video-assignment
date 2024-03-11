@@ -2,6 +2,8 @@ import { GET_VIDEOS } from "./actionType";
 
 const initialState = {
   videos: null,
+  totalPages: null,
+  currentPage: null,
 };
 
 const storeReducer = (store = initialState, action) => {
@@ -12,6 +14,8 @@ const storeReducer = (store = initialState, action) => {
       return {
         ...store,
         videos: payload.videos,
+        totalPages: payload.totalPages,
+        currentPage: payload.currentPage,
       };
     default:
       return store;

@@ -49,7 +49,9 @@ const VideoScreen: React.FC = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [showDescription, setShowDescription] = useState(false);
   const [showComments, setShowComments] = useState(false);
-  const { videos } = useSelector((state: { videos: Video[] }) => state);
+  const { videos, currentPage } = useSelector(
+    (state: { videos: Video[]; currentPage: number }) => state
+  );
 
   const dispatch = useDispatch();
 
@@ -75,9 +77,9 @@ const VideoScreen: React.FC = () => {
   }, [id, videos]);
 
   useEffect(() => {
-    dispatch(getVideos());
+    dispatch(getVideos(currentPage));
     window.scrollTo(0, 0);
-  }, [id, dispatch]);
+  }, [id, dispatch, currentPage]);
 
   const handleLike = () => {
     if (!liked) {
