@@ -54,7 +54,7 @@ const HomeScreen: React.FC = () => {
           onClick={() => handlePageChange(i)}
           className={`btn-pagination ${
             currentPage === i
-              ? "bg-blue-500 text-white"
+              ? "bg-[#808080] text-white font-semibold"
               : "bg-gray-800 text-white hover:bg-gray-700"
           } focus:outline-none focus:ring px-4 py-2`}
         >
@@ -96,7 +96,7 @@ const HomeScreen: React.FC = () => {
               />
             ))}
       </div>
-      <div className="flex justify-center mt-4 space-x-2">
+      <div className="flex justify-center my-10 space-x-2">
         {renderPaginationButtons()}
       </div>
     </div>
