@@ -27,7 +27,7 @@ This project is a dynamic video player built using ReactJS, TypeScript, Tailwind
 ![2](https://github.com/shivamcalis1998/Hypergro-video-assignment/assets/114653221/6b53d848-a8e2-4c4e-8730-ab0b72f2d5be)
 ## Video Player
 ![3](https://github.com/shivamcalis1998/Hypergro-video-assignment/assets/114653221/b1a115a2-dd14-4413-8d56-548505e2d40b)
-## Comments
+## Likes and Comments
 ![4](https://github.com/shivamcalis1998/Hypergro-video-assignment/assets/114653221/425e5fea-15f1-4ed3-a9b6-96a6e31eac1e)
 
 
