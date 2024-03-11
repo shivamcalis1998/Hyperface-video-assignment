@@ -5,11 +5,13 @@ import { getVideos } from "../../redux/action.js";
 import SkeletionLoading from "../SkeletonLoading/SkeletonLoading.tsx";
 
 const HomeScreen: React.FC = () => {
-  const { videos } = useSelector((state: { videos: Video[] }) => state);
+  const { videos, totalPages } = useSelector(
+    (state: { videos: Video[]; currentPage: number; totalPages: number }) =>
+      state
+  );
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 11;
 
   useEffect(() => {
     setLoading(true); // Set loading to true when fetching new videos
