@@ -46,7 +46,7 @@ This project is a dynamic video player built using ReactJS, TypeScript, Tailwind
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/shivamcalis1998/propftx-full-stack.git
+   git clone https://github.com/shivamcalis1998/Hypergro-video-assignment.git
    ```
 2. **Navigate to the project directory**:
    ```bash
