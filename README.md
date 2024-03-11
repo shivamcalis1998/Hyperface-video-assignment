@@ -21,7 +21,6 @@ This project is a dynamic video player built using ReactJS, TypeScript, Tailwind
 ## Screenshot
 ## HomePage
 ![1](https://github.com/shivamcalis1998/Hypergro-video-assignment/assets/114653221/a1fbb5e1-2e56-4540-a1bd-c85d8835b4e3)
-## Screenshot
 ## Pagination
 ![Screenshot (636)](https://github.com/shivamcalis1998/Hypergro-video-assignment/assets/114653221/342918f1-5c35-404c-b821-28aef930535a)
 ## Skeleton Loading
