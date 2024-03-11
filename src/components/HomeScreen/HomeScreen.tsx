@@ -5,16 +5,18 @@ import { getVideos } from "../../redux/action.js";
 import SkeletionLoading from "../SkeletonLoading/SkeletonLoading.tsx";
 
 const HomeScreen: React.FC = () => {
-  const { videos } = useSelector((state) => state);
+  const { videos } = useSelector((state: { videos: Video[] }) => state);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 11;
 
   useEffect(() => {
+    setLoading(true); // Set loading to true when fetching new videos
     dispatch(getVideos(currentPage))
       .then(() => setLoading(false))
       .catch(() => setLoading(false));
+    window.scrollTo(0, 0);
   }, [dispatch, currentPage]);
 
   const handlePageChange = (newPage) => {
@@ -22,7 +24,7 @@ const HomeScreen: React.FC = () => {
   };
 
   const renderPaginationButtons = () => {
-    const buttons = [];
+    const buttons: JSX.Element[] = [];
     const maxButtonsToShow = 3;
     let startPage = Math.max(1, currentPage - Math.floor(maxButtonsToShow / 2));
     let endPage = Math.min(totalPages, startPage + maxButtonsToShow - 1);
